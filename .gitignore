@@ -169,3 +169,15 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+
+# Acrescimos
+
+venv/
+Include/
+Lib/
+Scripts/
+share/
+pyvenv.cfg
+.idea
+.vscode

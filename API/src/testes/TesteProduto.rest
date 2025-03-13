@@ -1,9 +1,16 @@
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhYmMiLCJleHAiOjE3NDE5MDc5OTR9.xAHT77RXnaZWkmk_TmsJ4s5wPtcoplEUVtAvKCCra5I
+
 ### Verbo GET – listar todos
 GET http://localhost:8000/produto/ HTTP/1.1
+Authorization: Bearer {{token}}
+
 ### Verbo GET – listar um
 GET http://localhost:8000/produto/10 HTTP/1.1
+Authorization: Bearer {{token}}
+
 ### Verbo POST – adicionar
 POST http://127.0.0.1:8000/produto/ HTTP/1.1
+Authorization: Bearer {{token}}
 content-type: application/json
 
 {
@@ -12,8 +19,10 @@ content-type: application/json
 "foto" : "",
 "valor_unitario" : "10.00"
 }
+
 ### Verbo PUT – atualiza
 PUT http://127.0.0.1:8000/produto/1 HTTP/1.1
+Authorization: Bearer {{token}}
 content-type: application/json
 
 {
@@ -22,5 +31,7 @@ content-type: application/json
 "foto" : "",
 "valor_unitario" : "5.00"
 }
+
 ### Verbo DELETE - excluir
 DELETE http://127.0.0.1:8000/produto/1 HTTP/1.1
+Authorization: Bearer {{token}} 

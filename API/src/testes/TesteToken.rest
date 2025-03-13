@@ -1,0 +1,19 @@
+### ao logar, gera um token que deve ser usado para acessar as rotas da API ABC
+curl -X 'POST' 'http://127.0.0.1:8000/token' \
+     -H 'accept: application/json' \
+     -H 'Content-Type: application/x-www-form-urlencoded' \
+     -d 'username=abc&password=bolinhas'
+
+### ao logar, gera um token que deve ser usado para acessar as rotas da API BOLINHAS
+curl -X 'POST' 'http://127.0.0.1:8000/token' \
+     -H 'accept: application/json' \
+     -H 'Content-Type: application/x-www-form-urlencoded' \
+     -d 'username=bolinhas&password=bolinhas'
+
+### token gerado
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhYmMiLCJleHAiOjE3NDE5MDc1NDh9.pi89JUqtQpEjA00SZosnD3Ere_jQ5Lo0Fy9c76Ifw6M
+
+### teste token
+curl -X 'GET' 'http://127.0.0.1:8000/token/logado/' \
+     -H 'accept: application/json' \
+     -H 'Authorization: Bearer {{token}}'

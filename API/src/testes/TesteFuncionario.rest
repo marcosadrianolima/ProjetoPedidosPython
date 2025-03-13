@@ -1,10 +1,16 @@
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhYmMiLCJleHAiOjE3NDE5MDc5OTR9.xAHT77RXnaZWkmk_TmsJ4s5wPtcoplEUVtAvKCCra5I
+
 ### Verbo GET – listar todos
 GET http://localhost:8000/funcionario/ HTTP/1.1
+Authorization: Bearer {{token}}
+
 ### Verbo GET – listar um
 GET http://localhost:8000/funcionario/1 HTTP/1.1
+Authorization: Bearer {{token}}
 
 ### Verbo GET – validar cpj
 POST http://localhost:8000/funcionario/login/ HTTP/1.1
+Authorization: Bearer {{token}}
 content-type: application/json
 
 {
@@ -17,10 +23,14 @@ content-type: application/json
 "grupo": 1
 }
 
+
 ### Verbo GET – validar cpf
 GET http://localhost:8000/funcionario/cpf/1 HTTP/1.1
+Authorization: Bearer {{token}}
+
 ### Verbo POST – adicionar
 POST http://127.0.0.1:8000/funcionario/ HTTP/1.1
+Authorization: Bearer {{token}}
 content-type: application/json
 
 {
@@ -33,6 +43,7 @@ content-type: application/json
 }
 ### Verbo PUT – atualiza
 PUT http://127.0.0.1:8000/funcionario/1 HTTP/1.1
+Authorization: Bearer {{token}}
 content-type: application/json
 
 {
@@ -45,3 +56,4 @@ content-type: application/json
 }
 ### Verbo DELETE - excluir
 DELETE http://127.0.0.1:8000/funcionario/1 HTTP/1.1
+Authorization: Bearer {{token}}

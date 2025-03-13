@@ -6,6 +6,8 @@ import uvicorn
 from app import FuncionarioDAO, ClienteDAO, ProdutoDAO
 from contextlib import asynccontextmanager
 
+import security
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -37,6 +39,7 @@ async def root():
 
 
 # Mapeamento das rotas/endpoints
+app.include_router(security.router)
 app.include_router(FuncionarioDAO.router)
 app.include_router(ClienteDAO.router)
 app.include_router(ProdutoDAO.router)

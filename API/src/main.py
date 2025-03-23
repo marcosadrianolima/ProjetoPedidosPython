@@ -3,7 +3,7 @@ from settings import HOST, PORT, RELOAD
 import uvicorn
 
 # Import das classes com as rotas/endpoints
-from app import FuncionarioDAO, ClienteDAO, ProdutoDAO
+from app import FuncionarioDAO, ClienteDAO, ProdutoDAO, ComandaDAO
 from contextlib import asynccontextmanager
 
 import security
@@ -43,6 +43,7 @@ app.include_router(security.router)
 app.include_router(FuncionarioDAO.router)
 app.include_router(ClienteDAO.router)
 app.include_router(ProdutoDAO.router)
+app.include_router(ComandaDAO.router)
 
 
 if __name__ == "__main__":

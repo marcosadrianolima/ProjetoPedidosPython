@@ -1,4 +1,4 @@
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhYmMiLCJleHAiOjE3NDE5MDc5OTR9.xAHT77RXnaZWkmk_TmsJ4s5wPtcoplEUVtAvKCCra5I
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhYmMiLCJleHAiOjE3NDI3NjQ5Mjl9.vqIraH16tFyHFhvkGvjExAz07c22_l_u6nz1mD0W5bg
 
 ### Verbo GET – listar todos
 GET http://localhost:8000/cliente/ HTTP/1.1
@@ -20,6 +20,17 @@ content-type: application/json
 {
 "nome" : "Luciano Coelho",
 "cpf" : "1",
+"telefone" : "tel2383738"
+}
+
+### Verbo POST – adicionar Meu cliente
+POST http://127.0.0.1:8000/cliente/ HTTP/1.1
+Authorization: Bearer {{token}}
+content-type: application/json
+
+{
+"nome" : "Marcos Adriano Ribeiro Lima",
+"cpf" : "2",
 "telefone" : "tel2383738"
 }
 

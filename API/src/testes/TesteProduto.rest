@@ -1,4 +1,4 @@
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhYmMiLCJleHAiOjE3NDE5MDc5OTR9.xAHT77RXnaZWkmk_TmsJ4s5wPtcoplEUVtAvKCCra5I
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhYmMiLCJleHAiOjE3NDI3NjQ5Mjl9.vqIraH16tFyHFhvkGvjExAz07c22_l_u6nz1mD0W5bg
 
 ### Verbo GET – listar todos
 GET http://localhost:8000/produto/ HTTP/1.1
@@ -35,3 +35,29 @@ content-type: application/json
 ### Verbo DELETE - excluir
 DELETE http://127.0.0.1:8000/produto/1 HTTP/1.1
 Authorization: Bearer {{token}} 
+
+
+
+### Verbo POST – adicionar Bolinho carne, coxinha, risoles, salsinha, pao de queijo, crocrete
+POST http://127.0.0.1:8000/produto/ HTTP/1.1
+Authorization: Bearer {{token}}
+content-type: application/json
+
+{
+"nome" : "Pastel teste",
+"descricao" : "descrição",
+"foto" : "",
+"valor_unitario" : "10.00"
+}
+
+### Verbo PUT – atualiza pastel
+PUT http://127.0.0.1:8000/produto/6 HTTP/1.1
+Authorization: Bearer {{token}}
+content-type: application/json
+
+{
+"nome" : "pastel de carne, queijo e ovo",
+"descricao" : "descrição",
+"foto" : "",
+"valor_unitario" : "5.00"
+}

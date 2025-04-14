@@ -17,3 +17,10 @@ curl -X 'POST' 'http://127.0.0.1:8000/token' \
 curl -X 'GET' 'http://127.0.0.1:8000/token/logado/' \
      -H 'accept: application/json' \
      -H 'Authorization: Bearer {{token}}'
+
+### Teste chamada HTTP
+curl -v --http3 -X 'POST' 'https://127.0.0.1:4443/token' \
+     -H 'accept: application/json' \
+     -H 'Content-Type: application/x-www-form-urlencoded' \
+     -d 'username=abc&password=bolinhas' \
+     --insecure

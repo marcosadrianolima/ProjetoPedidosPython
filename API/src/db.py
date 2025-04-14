@@ -7,8 +7,8 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
 
-engine = create_engine("sqlite:///pastelaria_db.db")
-# engine = create_engine(STR_DATABASE, echo=True)
+# engine = create_engine("sqlite:///pastelaria_db.db")
+engine = create_engine(STR_DATABASE, echo=True)
 
 Session = sessionmaker(bind=engine)
 # Session = sessionmaker(bind=engine, autocommit=False, autoflush=True)

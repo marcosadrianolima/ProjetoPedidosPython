@@ -1,6 +1,6 @@
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhYmMiLCJleHAiOjE3NDI3NjQ5Mjl9.vqIraH16tFyHFhvkGvjExAz07c22_l_u6nz1mD0W5bg
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhYmMiLCJleHAiOjE3NDIyNjQ4MDl9.HuoL8A0V7-CAhUrF9FCCZWAo9RlD25WDl_urVXmA7ds
 ### Verbo GET – filtrar por id
-GET http://localhost:8000/comanda/3 HTTP/1.1
+GET http://localhost:8000/comanda/2 HTTP/1.1
 Authorization: Bearer {{token}}
 
 ### Verbo GET – filtrar por status
@@ -13,7 +13,7 @@ Authorization: Bearer {{token}}
 content-type: application/json
 
 {
-"comanda" : "123456",
+"comanda" : "1092",
 "data_hora" : "2023-10-02",
 "status" : 0,
 "funcionario_id" : 1,

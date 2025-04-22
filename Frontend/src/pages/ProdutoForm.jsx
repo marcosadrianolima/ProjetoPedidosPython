@@ -1,24 +1,21 @@
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import {
   TextField,
   Button,
   Box,
   Typography,
-  MenuItem,
-  FormControl,
-  InputLabel,
-  Select,
-  Toolbar,
-  Input
+  Toolbar
 } from '@mui/material';
 import UploadFileIcon from '@mui/icons-material/UploadFile';
-import React, { useState } from "react";
+import React, { useState, forwardRef } from "react";
+import { IMaskInput } from "react-imask";
+import { toast } from "react-toastify";
 
 const ProdutoForm = () => {
   const {
     register,
+    control,
     handleSubmit,
-    // reset,
     formState: { errors }
   } = useForm();
 
@@ -26,7 +23,33 @@ const ProdutoForm = () => {
 
   const onSubmit = (data) => {
     console.log("Dados do produto:", data);
+    toast.success("Produto cadastrado com sucesso!");
   };
+  const CurrencyInput = forwardRef(function CurrencyInput(props, ref) {
+    const { onChange, ...other } = props;
+  
+    return (
+      <IMaskInput
+        {...other}
+        mask="R$ num"
+        blocks={{
+          num: {
+            mask: Number,
+            thousandsSeparator: ".",
+            radix: ",",
+            mapToRadix: [".", ","],
+            scale: 2,
+            padFractionalZeros: true,
+            normalizeZeros: true,
+            min: 0,
+          },
+        }}
+        inputRef={ref}
+        onAccept={(value) => onChange(value)}
+        overwrite
+      />
+    );
+  });
 
   return (
     <Box
@@ -57,92 +80,113 @@ const ProdutoForm = () => {
           mb: 2
         }}
       >
-    <TextField
-        label="Nome"
-        fullWidth
-        margin="normal"
-        {...register('nome', { required: 'Nome é obrigatório' })}
-        error={!!errors.nome}
-        helperText={errors.nome?.message}
+        <TextField
+          label="Nome"
+          fullWidth
+          margin="normal"
+          {...register('nome', {
+            required: 'Nome é obrigatório',
+            maxLength: { value: 100, message: 'Nome deve ter no máximo 100 caracteres' }
+          })}
+          error={!!errors.nome}
+          helperText={errors.nome?.message}
         />
 
-      <TextField
-        label="Descrição"
-        fullWidth
-        margin="normal"
-        {...register('descricao', { required: 'Descrição é obrigatório' })}
-        error={!!errors.descricao}
-        helperText={errors.descricao?.message}
+        <TextField
+          label="Descrição"
+          fullWidth
+          margin="normal"
+          {...register('descricao', {
+            required: 'Descrição é obrigatória',
+            minLength: { value: 6, message: 'Descrição deve ter no mínimo 6 caracteres' },
+            maxLength: { value: 100, message: 'Descrição deve ter no máximo 100 caracteres' }
+          })}
+          error={!!errors.descricao}
+          helperText={errors.descricao?.message}
         />
 
-      <TextField
-        label="Valor Unitário"
-        fullWidth
-        margin="normal"
-        {...register('valor_unitario', { required: 'Valor unitário é obrigatório' })}
-        error={!!errors.valor_unitario}
-        helperText={errors.valor_unitario?.message}
+        <Controller
+          name="valor_unitario"
+          control={control}
+          rules={{ required: "Valor unitário é obrigatório" }}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              label="Valor Unitário"
+              fullWidth
+              margin="normal"
+              InputProps={{
+                inputComponent: CurrencyInput,
+              }}
+              error={!!errors.valor_unitario}
+              helperText={errors.valor_unitario?.message}
+            />
+          )}
         />
 
-      <Box
-          component="form"
-          onSubmit={handleSubmit(onSubmit)}
-          sx={{
-            backgroundColor: "#fff",
-            padding: 3,
-            borderRadius: 2,
-            boxShadow: 2,
-            mt: 3,
+        {/* Campo de upload de imagem */}
+        <Controller
+          name="imagem"
+          control={control}
+          rules={{
+            required: "Imagem é obrigatória",
+            validate: {
+              isImage: (value) => {
+                const file = value?.[0];
+                if (!file) return "Imagem é obrigatória";
+
+                const allowedTypes = ["image/png", "image/jpeg", "image/jpg", "image/gif"];
+                return allowedTypes.includes(file.type) || "Formato inválido. Use PNG, JPG, JPEG ou GIF";
+              }
+            }
           }}
-        >
-          {/* Input invisível */}
-          <input
-            type="file"
-            accept="image/*"
-            id="upload-image"
-            style={{ display: "none" }}
-            {...register("imagem", {
-              required: "Imagem é obrigatória",
-              onChange: (e) => setSelectedFileName(e.target.files[0]?.name || "")
-            })}
-          />
+          render={({ field: { onChange, ref }, fieldState: { error } }) => (
+            <>
+              <input
+                type="file"
+                accept="image/png, image/jpeg, image/jpg, image/gif"
+                id="upload-image"
+                style={{ display: "none" }}
+                onChange={(e) => {
+                  onChange(e.target.files); // envia para o form
+                  setSelectedFileName(e.target.files[0]?.name || "");
+                }}
+                ref={ref}
+              />
 
-          {/* Botão estilizado */}
-          <label htmlFor="upload-image">
-            <Button
-              variant="contained"
-              component="span"
-              startIcon={<UploadFileIcon />}
-            >
-              Selecionar Imagem
-            </Button>
-          </label>
+              <label htmlFor="upload-image">
+                <Button
+                  variant="contained"
+                  component="span"
+                  startIcon={<UploadFileIcon />}
+                >
+                  Selecionar Imagem
+                </Button>
+              </label>
 
-          {/* Nome do arquivo */}
-          {selectedFileName && (
-            <Typography variant="body2" sx={{ mt: 1 }}>
-              Arquivo selecionado: <strong>{selectedFileName}</strong>
-            </Typography>
+              {selectedFileName && (
+                <Typography variant="body2" sx={{ mt: 1 }}>
+                  Arquivo selecionado: <strong>{selectedFileName}</strong>
+                </Typography>
+              )}
+
+              {error && (
+                <Typography variant="body2" color="error" sx={{ mt: 1 }}>
+                  {error.message}
+                </Typography>
+              )}
+            </>
           )}
+        />
 
-          {/* Mensagem de erro */}
-          {errors.imagem && (
-            <Typography variant="body2" color="error" sx={{ mt: 1 }}>
-              {errors.imagem.message}
-            </Typography>
-          )}
-      </Box>
-        
-
-        <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 2 }}>
-        <Button sx={{ mr: 1 }} variant="outlined" color="secondary">
+        <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 4 }}>
+          <Button sx={{ mr: 1 }} variant="outlined" color="secondary">
             Cancelar
-        </Button>
-        <Button type="submit" variant="contained" color="primary">
+          </Button>
+          <Button type="submit" variant="contained" color="primary">
             Cadastrar
-        </Button>
+          </Button>
         </Box>
-
       </Box>
     </Box>
   );

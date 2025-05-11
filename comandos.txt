@@ -1,0 +1,101 @@
+Comandos python
+
+- python -m venv venv
+- venv\Scripts\activate
+- venv\Scripts\deactivate
+- python app.py
+
+python -m pip install --upgrade pip
+
+pip install "fastapi[standard]"
+pip install "uvicorn[standard]"
+pip install python-dotenv
+pip install sqlalchemy
+
+## Autenticação
+pip install "python-jose[criptografia]" ##JWT
+pip install "passlib[bcrypt]" ##Criar hash de senhas
+pip install python-multipart ## multipart/form-data para passar o tokens na chamada HTTP
+
+## Autenticação
+
+pip install sqlalchemy
+pip install pymssql
+pip install cryptography
+
+pip install hypercorn[h3] aioquic
+
+pip freeze > requirements.txt
+
+python src/main.py
+
+URL
+
+http://127.0.0.1:8000/docs
+
+Extensõns VS Code
+
+SQLite Viewer
+SQLite3 Editor
+
+
+## DOCKER
+
+docker build -t comanda-api -f Dockerfile .
+
+docker login --username=marcosribeirolima
+
+docker tag comanda-api marcosribeirolima/comanda-api:v1.0.0
+
+docker push marcosribeirolima/comanda-api:v1.0.0
+
+docker run -d -it --name comanda-api -p 4443:4443 marcosribeirolima/comanda-api:v1.0.0
+
+docker compose up -d
+
+
+
+
+
+############# FRONTEND #############
+npm create vite@latest frontend -- --template react
+
+npm install
+
+npm cache clean --force
+npm install react-router-dom react-hook-form
+npm install @mui/material @mui/icons-material
+npm install @emotion/react@latest @emotion/styled
+
+
+
+
+
+Arquivo .env
+
+HOST = 0.0.0.0
+PORT = 4443
+RELOAD = True
+DB_SGDB = mysql
+DB_NAME = comandas_db
+DB_HOST = db:3306
+DB_USER = coelho
+DB_PASS = abcBolinhas12345
+SECRET_KEY =
+"891678b9fbb3b6245b3163fce68934
+98f59b4d37a802be3ccc2271858b76a
+d56“
+ALGORITHM = "HS256“
+ACCESS_TOKEN_EXPIRE_MINUTES =240
+
+
+
+############## PROXY ##############
+python.exe -m pip install --upgrade pip
+pip install Flask Flask-CORS
+pip install requests
+pip install python-dotenv
+pip freeze > requirements.txt
+
+python .\src\app.py
+flask --app .\src\app.py routes

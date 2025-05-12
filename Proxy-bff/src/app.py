@@ -10,8 +10,6 @@ from funcoes import Funcoes
 
 # blueprints
 from mod_funcionario.funcionario import bp_funcionario
-from mod_produto.produto import bp_produto
-from mod_cliente.cliente import bp_cliente
 
 # Configuração básica de logging
 logging.basicConfig(level=logging.INFO)
@@ -58,8 +56,6 @@ def before_request():
 
 # registra as rotas dos blueprints
 app.register_blueprint(bp_funcionario)
-app.register_blueprint(bp_produto)
-app.register_blueprint(bp_cliente)
 
 # Ponto de entrada para execução
 if __name__ == '__main__':

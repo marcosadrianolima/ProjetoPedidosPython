@@ -1,0 +1,482 @@
+{
+	"info": {
+		"_postman_id": "4f92588d-e073-4633-ac5a-5d6744244c22",
+		"name": "ProxyBFF - Marcos Lima",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41593043",
+		"_collection_link": "https://fs7777-7369.postman.co/workspace/fs-Workspace~46eb7a25-251f-4bd9-8513-32c68fd84026/collection/41593043-4f92588d-e073-4633-ac5a-5d6744244c22?action=share&source=collection_link&creator=41593043"
+	},
+	"item": [
+		{
+			"name": "Funcionarios",
+			"item": [
+				{
+					"name": "BuscarTodos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url_funcionario}}/all",
+							"host": [
+								"{{base_url_funcionario}}"
+							],
+							"path": [
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BuscarPorId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url_funcionario}}/one?id_funcionario=2",
+							"host": [
+								"{{base_url_funcionario}}"
+							],
+							"path": [
+								"one"
+							],
+							"query": [
+								{
+									"key": "id_funcionario",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Novo Funcionario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Marcos Lima\",\r\n    \"matricula\": \"12345\",\r\n    \"cpf\" : \"2020\",\r\n    \"telefone\" : \"49 99999999\",\r\n    \"grupo\" : 1,\r\n    \"senha\" : \"abcbolinhas\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url_funcionario}}",
+							"host": [
+								"{{base_url_funcionario}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar Funcionario",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_funcionario\": \"2\",\r\n    \"nome\": \"Marcos Lima editado\",\r\n    \"matricula\": \"12345\",\r\n    \"cpf\" : \"2020\",\r\n    \"telefone\" : \"49 99999999\",\r\n    \"grupo\" : 1,\r\n    \"senha\" : \"abcbolinhas\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url_funcionario}}",
+							"host": [
+								"{{base_url_funcionario}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Excluir Funcionario",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url_funcionario}}?id_funcionario=2",
+							"host": [
+								"{{base_url_funcionario}}"
+							],
+							"query": [
+								{
+									"key": "id_funcionario",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cpf Funcionario Existe",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url_funcionario}}/cpf?cpf=2020",
+							"host": [
+								"{{base_url_funcionario}}"
+							],
+							"path": [
+								"cpf"
+							],
+							"query": [
+								{
+									"key": "cpf",
+									"value": "2020"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login funcionario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Marcos Lima\",\r\n    \"matricula\": \"12345\",\r\n    \"cpf\" : \"2020\",\r\n    \"telefone\" : \"49 99999999\",\r\n    \"grupo\" : 1,\r\n    \"senha\" : \"abcbolinhas\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url_funcionario}}/login",
+							"host": [
+								"{{base_url_funcionario}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Produtos",
+			"item": [
+				{
+					"name": "Buscar Todos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url_produto}}/all",
+							"host": [
+								"{{base_url_produto}}"
+							],
+							"path": [
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Por Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url_produto}}/one?id_produto=1",
+							"host": [
+								"{{base_url_produto}}"
+							],
+							"path": [
+								"one"
+							],
+							"query": [
+								{
+									"key": "id_produto",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Novo Produto",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Pastel de Frango\",\r\n  \"descricao\": \"O melhor pastel\",\r\n  \"foto\": \"\",\r\n  \"valor_unitario\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url_produto}}",
+							"host": [
+								"{{base_url_produto}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar Produto",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id_produto\": 1,\r\n  \"nome\": \"Pastel de frango editado\",\r\n  \"descricao\": \"O melhor pastel editado\",\r\n  \"foto\": \"\",\r\n  \"valor_unitario\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url_produto}}",
+							"host": [
+								"{{base_url_produto}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Excluir Produto",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url_produto}}?id_produto=1",
+							"host": [
+								"{{base_url_produto}}"
+							],
+							"query": [
+								{
+									"key": "id_produto",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cliente",
+			"item": [
+				{
+					"name": "Buscar Todos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url_cliente}}/all",
+							"host": [
+								"{{base_url_cliente}}"
+							],
+							"path": [
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Por Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url_cliente}}/one?id_cliente=1",
+							"host": [
+								"{{base_url_cliente}}"
+							],
+							"path": [
+								"one"
+							],
+							"query": [
+								{
+									"key": "id_cliente",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cpf Cliente Existe",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url_cliente}}/cpf?cpf=123.456.789-11",
+							"host": [
+								"{{base_url_cliente}}"
+							],
+							"path": [
+								"cpf"
+							],
+							"query": [
+								{
+									"key": "cpf",
+									"value": "123.456.789-11"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Novo Cliente",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Marcos Lima Cliente\",\r\n  \"cpf\": \"123456789\",\r\n  \"telefone\": \"49 99999999\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url_cliente}}",
+							"host": [
+								"{{base_url_cliente}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar Cliente",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id_cliente\": 1,\r\n  \"nome\": \"Marcos Lima Editado\",\r\n  \"cpf\": \"12345678910\",\r\n  \"telefone\": \"49 999999910\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url_cliente}}",
+							"host": [
+								"{{base_url_cliente}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Excluir Cliente",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url_cliente}}?id_cliente=1",
+							"host": [
+								"{{base_url_cliente}}"
+							],
+							"query": [
+								{
+									"key": "id_cliente",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "teste_token",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/teste_token",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"teste_token"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://127.0.0.1:5000/api/",
+			"type": "string"
+		},
+		{
+			"key": "base_url_funcionario",
+			"value": "{{base_url}}funcionario",
+			"type": "string"
+		},
+		{
+			"key": "base_url_cliente",
+			"value": "{{base_url}}cliente",
+			"type": "string"
+		},
+		{
+			"key": "base_url_produto",
+			"value": "{{base_url}}produto",
+			"type": "string"
+		},
+		{
+			"key": "base_url_token",
+			"value": "{{base_url}}token",
+			"type": "string"
+		}
+	]
+}

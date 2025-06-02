@@ -2,21 +2,7 @@ import React, { useEffect, useState } from "react";
 // Controller é usado para conectar os campos do formulário ao estado do formulário gerenciado pelo useForm.
 // O Controller é um componente que envolve o campo do formulário e fornece as propriedades e métodos necessários para gerenciar o estado do campo.
 import { useForm, Controller } from "react-hook-form";
-import {
-  TextField,
-  Button,
-  Box,
-  Typography,
-  MenuItem,
-  FormControl,
-  InputLabel,
-  Select,
-  Toolbar,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-} from "@mui/material";
+import { TextField, Button, Box, Typography, MenuItem, FormControl, InputLabel, Select, Toolbar, Dialog, DialogTitle, DialogContent, DialogActions } from "@mui/material";
 import IMaskInputWrapper from "../components/IMaskInputWrapper";
 // import dos services de funcionário, faz a comunicação com o backend
 import {
@@ -194,7 +180,6 @@ const FuncionarioForm = () => {
                     existente[0].id_funcionario &&
                     existente[0].id_funcionario.toString() !== id
                   ) {
-                    console.log("aqui")
                     setCpfExistente(existente[0]);
                     setOpenDialog(true);
                   }

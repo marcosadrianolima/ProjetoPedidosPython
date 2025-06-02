@@ -33,14 +33,21 @@ const AppRoutes = () => {
 
         {/* Rotas protegidas com PrivateRoute */}
         <Route path="/home" element={<PrivateRoute><Home /></PrivateRoute>}/>
+        
         <Route path="/funcionarios" element={<PrivateRoute><FuncionarioList /></PrivateRoute>}/>
         <Route path="/funcionario" element={<PrivateRoute><FuncionarioForm /></PrivateRoute>}/>
         {/* Rota para editar ou visualizar funcionário, com opr {view ou edit} e id dinâmico */}
         <Route path="/funcionario/:opr/:id" element={<PrivateRoute> <FuncionarioForm /> </PrivateRoute>} />
+
         <Route path="/clientes" element={<PrivateRoute><ClienteList /></PrivateRoute>}/>
         <Route path="/cliente" element={<PrivateRoute><ClienteForm /></PrivateRoute>}/>
+        {/* Rota para editar ou visualizar produto, com opr {view ou edit} e id dinâmico */}
+        <Route path="/cliente/:opr/:id" element={<PrivateRoute> <ClienteForm /> </PrivateRoute>} />
+        
         <Route path="/produtos" element={<PrivateRoute><ProdutoList /></PrivateRoute>}/>
         <Route path="/produto" element={<PrivateRoute><ProdutoForm /></PrivateRoute>}/>
+        {/* Rota para editar ou visualizar produto, com opr {view ou edit} e id dinâmico */}
+        <Route path="/produto/:opr/:id" element={<PrivateRoute> <ProdutoForm /> </PrivateRoute>} />
 
         {/* Rota para páginas não encontradas */}
         <Route path="*" element={<NotFound />} />

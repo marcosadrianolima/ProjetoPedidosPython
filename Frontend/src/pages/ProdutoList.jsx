@@ -13,6 +13,10 @@ import { toast } from 'react-toastify';
 // useTheme: usado para acessar o tema do Material-UI.
 import { useTheme } from '@mui/material/styles';
 
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
+
+
 function ProdutoList() {
   const navigate = useNavigate();
 
@@ -74,6 +78,92 @@ function ProdutoList() {
     }
   };
 
+  const exportarPdf = async () => {
+    const doc = new jsPDF();
+
+    doc.text("Lista de Produtos", 14, 15);
+
+    const colunas = ["ID", "Nome", "Valor", "Foto", "Descrição"];
+
+    const toBase64 = async (url) => {
+      try {
+        const response = await fetch(url);
+        const blob = await response.blob();
+        return await new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onloadend = () => resolve(reader.result);
+          reader.onerror = reject;
+          reader.readAsDataURL(blob);
+        });
+      } catch (error) {
+        console.error("Erro ao carregar imagem", error);
+        return null;
+      }
+    };
+
+    const linhas = await Promise.all(
+      produtos.map(async (p) => {
+        const imagemBase64 = p.foto ? await toBase64(p.foto) : null;
+        return {
+          id: p.id_produto,
+          nome: p.nome,
+          valor: `R$ ${p.valor_unitario}`,
+          descricao: p.descricao || "",
+          imagem: imagemBase64,
+        };
+      })
+    );
+
+    autoTable(doc, {
+      startY: 20,
+      head: [colunas],
+      body: linhas.map((p) => [
+        p.id,
+        p.nome,
+        p.valor,
+        "", // A imagem será desenhada na célula depois
+        p.descricao,
+      ]),
+      didDrawCell: function (data) {
+        // Evita desenhar imagem no cabeçalho
+        if (
+          data.column.index === 3 &&
+          data.section === "body" &&
+          data.row.index < linhas.length
+        ) {
+          const produto = linhas[data.row.index];
+          if (produto.imagem) {
+            const padding = 2;
+            const cellHeight = data.cell.height - padding * 2;
+            const cellWidth = data.cell.width - padding * 2;
+            const size = Math.min(cellHeight, cellWidth);
+
+            doc.addImage(
+              produto.imagem,
+              "JPEG",
+              data.cell.x + padding,
+              data.cell.y + padding,
+              size,
+              size
+            );
+          }
+        }
+      },
+      styles: {
+        fontSize: 10,
+        cellPadding: 4,
+      },
+      columnStyles: {
+        3: { cellWidth: 24 }, // largura da coluna da imagem
+      },
+    });
+
+    doc.save("produtos_com_foto.pdf");
+  };
+
+
+
+
   return (
     <TableContainer component={Paper}>
       <Toolbar
@@ -89,13 +179,22 @@ function ProdutoList() {
         <Typography variant="h6" color="primary">
           Produtos
         </Typography>
-        <Button
-          color="primary"
-          onClick={() => navigate('/produto')}
-          startIcon={<FiberNew />}
-        >
-          Novo
-        </Button>
+         <div style={{ display: "flex", gap: 8 }}>
+          <Button
+            variant="outlined"
+            onClick={exportarPdf}
+          >
+            Exportar PDF
+          </Button>
+
+          <Button
+            color="primary"
+            onClick={() => navigate('/produto')}
+            startIcon={<FiberNew />}
+          >
+            Novo
+          </Button>
+        </div>
       </Toolbar>
       <Table>
         <TableHead>

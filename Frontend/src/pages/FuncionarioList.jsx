@@ -27,6 +27,9 @@ import {
 import { toast } from "react-toastify";
 // useTheme para acessar o tema do Material-UI.
 import { useTheme } from "@mui/material/styles";
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
+
 function FuncionarioList() {
   // O useNavigate é um hook que permite navegar programaticamente entre as rotas da aplicação
   const navigate = useNavigate();
@@ -113,6 +116,30 @@ function FuncionarioList() {
       toast.error("Erro ao excluir funcionário.", { position: "top-center" });
     }
   };
+  const exportarPdf = () => {
+    const doc = new jsPDF();
+
+    doc.text("Lista de Funcionários", 14, 15);
+
+    const colunas = ["ID", "Nome", "CPF", "Matrícula", "Telefone", "Grupo"];
+    const linhas = funcionarios.map(f => [
+      f.id_funcionario,
+      f.nome,
+      f.cpf,
+      f.matricula,
+      f.telefone,
+      f.grupo
+    ]);
+
+    autoTable(doc, {
+      startY: 20,
+      head: [colunas],
+      body: linhas,
+      styles: { fontSize: 10 },
+    });
+
+    doc.save("funcionarios.pdf");
+  };
 
   return (
     <TableContainer component={Paper}>
@@ -129,13 +156,29 @@ function FuncionarioList() {
         <Typography variant="h6" color="primary">
           Funcionários
         </Typography>
-        <Button
+        <div style={{ display: "flex", gap: 8 }}>
+          <Button
+            variant="outlined"
+            onClick={exportarPdf}
+          >
+            Exportar PDF
+          </Button>
+
+          <Button
+            color="primary"
+            onClick={() => navigate("/funcionario")}
+            startIcon={<FiberNew />}
+          >
+            Novo
+          </Button>
+        </div>
+        {/* <Button
           color="primary"
           onClick={() => navigate("/funcionario")}
           startIcon={<FiberNew />}
         >
           Novo
-        </Button>
+        </Button> */}
       </Toolbar>
       <Table>
         <TableHead>

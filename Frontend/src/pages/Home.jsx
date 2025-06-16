@@ -1,7 +1,41 @@
 import React from "react";
 import { Box, Typography, Toolbar } from "@mui/material";
 
+export const obterGrupo = (grupo) => {
+  
+  switch (grupo) {
+    case 1:
+      return "Admin";
+    case 2:
+      return "Balcão";
+    case 3:
+      return "Caixa";
+    default:
+      return "Usuário não mapeado";
+  }
+};
+
 const Home = () => {
+  
+  const usuarioLogado = JSON.parse(sessionStorage.getItem("usuarioLigado"));
+  
+  const obterGrupo = (usuario) => {
+    if (!usuario || usuario.grupo == null) return "Usuário não mapeado";
+
+    switch (usuario.grupo) {
+      case 1:
+        return "Admin";
+      case 2:
+        return "Balcão";
+      case 3:
+        return "Caixa";
+      default:
+        return "Usuário não mapeado";
+    }
+  };
+
+  const grupo = obterGrupo(usuarioLogado);
+  
   return (
     <Box
       sx={{
@@ -35,7 +69,10 @@ const Home = () => {
         }}
       >
         <Typography variant="body1" color="textPrimary">
-          Bem-vindo ao aplicativo Comandas Marcos Lima!
+          Bem-vindo ao aplicativo Comandas <b>{usuarioLogado.nome}</b>!
+        </Typography>
+        <Typography variant="body1" color="textPrimary">
+          Grupo <b>{grupo}</b>!
         </Typography>
         <Typography variant="body1" color="textSecondary">
           Explore as funcionalidades e aproveite sua experiência.
